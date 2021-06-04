@@ -90,6 +90,62 @@
 			- Contains parameterized ctor accepting ThreadStart as parameter
 		- ThreadStart delegate
 			- This delegate accept method that does not have input and output parameters
+	- When multiple threads wants to use the resources at a time then there may be conflict occur while accesing resource
+		concurrenly. To provide the concurrent access (aka SYnchronization) of the resource using 
+			- lock
+			- Monitor
+			- Mutex
+	- The Mutxt class is derived from 'WaitHandle' abstract base class. This class is used to manage signaling across
+		multiple or concurrently running threads
+			- The 'WaitOne()' method is resoponsible for managing the single for other thraeds that the current thread 
+				has acquired resources so other threads will be pit on hold
+9. Task Parallel Programming
+	- Using Task Parallel Library (TPL)
+		- Set of APIs  (aka classes) used to encapsulate Mukti-Threading and Processing of collections Parallely
+		- Introduced in .NET 4.0+
+			- Concurrent Collections
+				- Thread Safe Collection classes for providing Concurrent Access of In-Memory data across thraeds 
+					- ConcurrentBag
+					- ConcurrentStack
+					- ConcurrentDictionary
+					- ConcurrentQueue
+						- USes by IIS 8+ for creating Threads those will be shared by mutiple ASP.NET apps working on IIS
+			- Task class
+				- Encapsulation over the Thread that repesents 'A Unit of Asynchronous Operation'
+				- Methods
+					- StartNew()
+					- Start()
+					- Wait()
+					- WaitAll()
+			- Parallel Class
+				- The class that provides a default concurrent access of resources
+				- Methods
+					- Invoke()
+						- Perform operations parallely by accessing multiple resources at a time
+					- For()
+						- Method to process the collection parallely
+					- ForEach()
+						- Same as for ait auto IEnumerations across collections	
+			- .NET 4.5 Improvements in TPL
+				- async and await
+					- Use 'async' modifier for a method that returns Task Object
+					- The async modifier is used by a method that must have at least one 
+						'awaitable' call (Asynchronously executing external call) using 'await'
+				- System.IO chnages for Async Methods for
+					- Stream Read/Write
+					- File Operations Read/Write
+				- Database Operations
+					- Async Connections
+					- Async Queriues
+					- Async DML Operations
+				- .NET 4.5 Asynchronous methods for UnManaged Resources
+					- Files
+						- ReadAsync() / WriteAsync() / FlushAsync()
+				- The async, the instruction given to CLR that the Task and hence the Thread must be created
+					for executing the operation
+				- The await, the instruction given to CLR that the 'wait()' must be invoked to make sure that
+					the operation is completed and result is back to caller
+
 
 
 # Hands -on -Lab
@@ -108,5 +164,18 @@
 	- While adding employee in department, if the capacity of the department is already full then generate an 
 		error message
 	- Update salary of all employees by 15%
+
+# Dayte 04-Jun-2021
+
+1. CReate an EMployee collection with 50 Records, the Employee Information will be stored as
+	- EmpNo, EmpName, Designation, Salary, DeptName, Tax
+	- Write Seperate methods to generate tax of Employee based on FOllowing Rules
+		- Designation: Manager, Tax is 30% of the Salary
+		- Designation: Engineer, Tax is 25% of the Salary
+		- Designation: Lead, Tax is 28% of the Salary
+		- Designation: Programming, Tax is 22% of the Salary
+	- Make sure that all thes methods are invoked at a time Parallely
+	- Write Down the Tax details of each employee in seperate file in the same methiod that is calculating the Tax
+2. Please go through the Task and Parallels demos carefully
 
 
