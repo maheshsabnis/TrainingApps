@@ -187,7 +187,7 @@
 - installing package from command prompt
 	- dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 3.1.15
 - To 'Scaffold' aka generate Data Access Layer from Database First Approach run the following command
-	- dotnet ef scaffold dbcontext "<Connection-String>" Mictosoft.EntityFrameworkCore.SqlServer 
+	- dotnet ef  dbcontext scaffold "<Connection-String>" Mictosoft.EntityFrameworkCore.SqlServer 
 		-o <Destination-Foldel-to-generate-model class files>
 	- Connection-String
 		- if Sql Srever is on the Local machine with Sql Server Authentication
