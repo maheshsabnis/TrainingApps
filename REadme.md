@@ -172,8 +172,51 @@
   </PropertyGroup>
 
 
+11. Using EF Core for Application Development for Database First Approach
+- Make sure that the dotnet ef is installed in global scope
+	- dotnet tool install --global dotnet-ef	
 
 
+- The Projetc must contains following NuGet Packages installed 
+	- Microsoft.EntityFrameworkCore
+	- Microsoft.EntityFrameworkCore.SqlServer
+	- Microsoft.EntityFrameworkCore.Design
+	- Microsoft.EntityFrameworkCore.Tools
+- Rightl-CLick on Project NAme and select Manage NuGet Package and serach package to install, make sure that
+	you select correct version and click on install button
+- installing package from command prompt
+	- dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 3.1.15
+- To 'Scaffold' aka generate Data Access Layer from Database First Approach run the following command
+	- dotnet ef scaffold dbcontext "<Connection-String>" Mictosoft.EntityFrameworkCore.SqlServer 
+		-o <Destination-Foldel-to-generate-model class files>
+	- Connection-String
+		- if Sql Srever is on the Local machine with Sql Server Authentication
+			- Data Source=.;Initial Catalog=<Database-name>;User Id=<Uname>;Password=<Pwd>;MultipleActiveResultSets=true
+
+		- if Sql Srever is on the Local machine with Windows Authentication
+			- Data Source=.;Initial Catalog=<Database-name>;Integrated Security=SSPI;MultipleActiveResultSets=true	
+		- If Sql Server is on remote machine
+			- Data Source=<NAME-of-Remote-Machine> OR <IP-Address>;initial Catalog=<Database-name>;Integrated Security=SSPI;MultipleActiveResultSets=true
+		- If using SqlExpress
+			- Data SOurce=.\\selexpress; initial Catalog=<Database-name>;Integrated Security=SSPI;MultipleActiveResultSets=true
+
+dotnet ef dbcontext scaffold "Server=DbServer;
+Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=PWD;MultipleActiveResultSets=False;Encrypt=True;
+	TrustServerCertificate=False;Connection Timeout=30;" 
+	Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+- EF COre Object Models
+	- DbContext class
+		- Class used to Manage Db Connection
+		- Manage Db Transactions
+		- Map the CLR class aka entity classes to database tables using DbSet<T>
+			- Where T is the CLR class name
+		- Methods
+			- OnConfiguring
+				- Contain the DbConnection configuration
+			- OnModelCreating
+				- Contains Code to Map CLR object with Database and relationships across CLR objects using
+					fluent APIs
 
 # Hands -on -Lab
 
