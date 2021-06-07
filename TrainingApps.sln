@@ -38,6 +38,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_TaskFactory", "CS_TaskFa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_Concurrentollection", "CS_Concurrentollection\CS_Concurrentollection.csproj", "{63C4E749-BB76-445F-81D5-F434D2F73A09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core_SingleFilePublish", "Core_SingleFilePublish\Core_SingleFilePublish.csproj", "{45BE154B-9CB3-4418-9836-764F35A118F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core_MathLib", "Core_MathLib\Core_MathLib.csproj", "{B0A6A7A7-195E-4FC8-A70A-56AB4C8E6D1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,14 @@ Global
 		{63C4E749-BB76-445F-81D5-F434D2F73A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63C4E749-BB76-445F-81D5-F434D2F73A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63C4E749-BB76-445F-81D5-F434D2F73A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45BE154B-9CB3-4418-9836-764F35A118F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45BE154B-9CB3-4418-9836-764F35A118F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45BE154B-9CB3-4418-9836-764F35A118F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45BE154B-9CB3-4418-9836-764F35A118F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A6A7A7-195E-4FC8-A70A-56AB4C8E6D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A6A7A7-195E-4FC8-A70A-56AB4C8E6D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A6A7A7-195E-4FC8-A70A-56AB4C8E6D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A6A7A7-195E-4FC8-A70A-56AB4C8E6D1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

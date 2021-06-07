@@ -146,6 +146,33 @@
 				- The await, the instruction given to CLR that the 'wait()' must be invoked to make sure that
 					the operation is completed and result is back to caller
 
+10. Using .NET Core
+- Single File Publish,
+	- Modify the .csproj file andn add following settings in it
+- Using the Runtime Identifier
+	- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
+	<PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<PublishSingleFile>true</PublishSingleFile>
+		- The setings for publushing the signle file
+	<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+		- The OS Where we target the single file publish
+  </PropertyGroup>
+- RUn the Publish wizard to publish the project in folder
+
+- To generate a signle file with required (mandaory) dependencies only, modify the .csproj file for
+	trimmed deployment
+		- <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<PublishSingleFile>true</PublishSingleFile>
+	<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+	  <PublishTrimmed>true</PublishTrimmed>
+  </PropertyGroup>
+
+
+
 
 
 # Hands -on -Lab
