@@ -217,6 +217,49 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 			- OnModelCreating
 				- Contains Code to Map CLR object with Database and relationships across CLR objects using
 					fluent APIs
+- EF Core Programming Features
+	- COnsider 'ctx' is an instance of DbContext
+	- Entity class is 'Employee' and DbSet<Employee> is Emp
+
+	- Redaing all records from Emp mapping
+		- ctx.Emp.ToList(); || ctx.Emp.ToListAsync()
+	- Reading a record based on Primary Key
+		- ctx.Emp.Find(<Primary-Key-Value>); || ctx.Emp.FindAsync(<Primary-Key-Value>);
+	- To CReate a new Record
+		- Create an Instance of Employee class
+			- var emp = new Employees()
+		- set its property values
+			- emp.EmpNo=""; emp.EmpName="";
+		- pass this object to the Add() method of Emp
+			- ctx.Emp.Add(emp); || ctx.Emp.AddAsync(emp);
+		- Commit Transactions
+			- ctx.SaveChanges(); || cxt.SaveChangesAsync();
+		- Add multiple records at a time
+			- ctx.Emp.AddRange(List of Employee); || ctx.Emp.AddRangeAsync(List of Employee); 
+	- To Update Record
+		- Search record based on primary key
+			- var empToSearch =  ctx.Emp.Find(<Primary-Key-Value>); || ctx.Emp.FindAsync(<Primary-Key-Value>);
+		- Approach 1: Updating properties from Searched object Individually
+			- empToSearch.EmpNo = <New-Value-Received-from-End-User> ;
+			- empToSearch.EmpName = <New-Value-Received-from-End-User> ;
+		- Commit Transaction
+			- ctx.SaveChanges(); || cxt.SaveChangesAsync();
+		- Approach 2:
+			- context.Entry<Department>(entity).State = EntityState.Modified;
+			- Commit Transactions
+				- ctx.SaveChanges(); || cxt.SaveChangesAsync();	
+	- To Delete
+		- Search record based on primary key
+			- var empToDelete =  ctx.Emp.Find(<Primary-Key-Value>); || ctx.Emp.FindAsync(<Primary-Key-Value>)
+		- Pass the searched record to Remove method
+			- ctx.Eo.Remove(empoDelete);
+		- Commit Transactions
+				- ctx.SaveChanges(); || cxt.SaveChangesAsync();	
+
+# Important Note while programming for EF Core
+	- Make sure that all  Transactional methods must be enclosed inside 'Exception-Hadling'
+		- instaed of catching the exception, throw it so that then layer accessing the EF COre logic class
+			will catch the exception
 
 # Hands -on -Lab
 
@@ -248,4 +291,31 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 	- Write Down the Tax details of each employee in seperate file in the same methiod that is calculating the Tax
 2. Please go through the Task and Parallels demos carefully
 
-
+# Date 07-Jun-2021
+- Generate the Entity Model using EF Database First
+# Date 08-Jun-2021
+- Implement the Application for the following
+	- CReate DepartmentService and EmployeeService classes tnose will contains the CRUD operations
+	- Make sure that the user defined execeptions must be present in each method of both service classes
+	- Create a class that will contain following methods
+		- AddDeptEmp(Dept, Emps)
+			- Dept is a single Department object which will be a new department entry
+			- Emps is a List of Employees to be created  for the new department
+		- Create a method that will List Employees Group by Department Names
+		- Create a method that will List Employees in group by designations
+	- CReate a class that will contain rules for Validations like follows
+		- DeptValidator(Dept) method
+			- This method will accept Dept as input parameter and will return validation errors based on following rules
+				- DeptNo is must
+				- DeptName is must and must start from UpperCase character
+				- Location is Must
+			- This method will return String Array as ouput parameter containing List of Error Messages if any 
+		- EmpValidator(Emp)
+			- This method will accept Emp as input parameter and will return validation errors based on following rules
+				- Empo is Must
+				- EMpName is must and must start from Upper Case character
+				- Salary is must and must be positive numeric
+				- Designation can be either
+					- Manager, Operator, Clerk, Engineer
+				- DeptUniqueId is must
+			- This method will return String Array as ouput parameter containing List of Error Messages if any 
