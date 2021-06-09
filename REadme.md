@@ -245,7 +245,10 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 		- Commit Transaction
 			- ctx.SaveChanges(); || cxt.SaveChangesAsync();
 		- Approach 2:
-			- context.Entry<Department>(entity).State = EntityState.Modified;
+			- ctx.Entry<Department>(entity).State = EntityState.Modified; OR ctx.Update<Department>(entity);
+				- The se3arched record must be detached from the context before State Update / Modification takes
+					place
+						- 	ctx.Entry(result).State = EntityState.Detached;
 			- Commit Transactions
 				- ctx.SaveChanges(); || cxt.SaveChangesAsync();	
 	- To Delete
@@ -255,6 +258,53 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 			- ctx.Eo.Remove(empoDelete);
 		- Commit Transactions
 				- ctx.SaveChanges(); || cxt.SaveChangesAsync();	
+- Code-First Approach
+	- Flexible Object Mapping
+		- Map the Private properties of the class to Table COlumns using Public Wrapper methods
+- Design Considerations of Code-First Approach
+	- Class Must have Identity Key (Use as Primary Key)
+	- Apply required Annotation Constraints on Properties
+	- Correctly define relationships across classes 
+	- The DataAnnotations for Constratints 
+		- System.ComponentModel.DataAnnotations
+			- RequiredAttribute, RegExAttribute, StringLengthAttribute, NumericLengthAtribute, CompareAttribute
+			- KeyAttribute
+			- ForeignKeyAttribute
+			- ConcurrencyCheckAttrubite
+			- TimeStampAttribue, can also be used for concurrency check
+				- applied on the property of the type byte[] 
+	- Using Fluent APIs, Allow developers to set behavior on Entity Classes while mapping with the Tables in database
+		- Defining One-to-Many Relatopnships
+		- ForeignKey
+		- Index and Unique Constaints
+		- Concurrency Tokens
+		- TimeStamp, 
+- Migrations
+	- This is the Processes of generating the C#+SQL Methods for 
+		- Table Creations
+		- Constratints
+		- Relations
+		- Dropping Tables
+		- Altering Columns
+		- Adding Columns
+	- Command for generating Migrations (Run from the command Prompt)
+		- dotnet ef migrations add <MIGRATION-NAME> -c <NAMESPACE-NAME.DBCONTEXT-CLASS-NAME>
+		- e.g.
+			- dotnet ef migrations add firstMigration -c Core_Code_First.Models.TrainingDbContext
+		- View List of Migrations
+			- dotnet ef migrations list
+		- Remove Wrong MIgrations
+			- dotnet ef migrations remove
+				- This will remove the latest generated migration
+	- The Migrations will generate tow classes
+		- Class garanarted which is derived from ''Migration' base class. THis class contains Up() method to create tables with constraints. The Down() method will contain commands for drop tables
+		- Class generated which is derived from 'ModelSnapshot' base class. This class contains information of mapping between CLR class with ots properties with the table in database
+	- Apply Migrations to generate database and tables
+		- Command
+			- dotnet ef database update -c <NAMESPACE-NAME.DBCONTEXT-CLASS-NAME>
+			- E.g.	
+				- dotnet ef database update -c Core_Code_First.Models.TrainingDbContext
+
 
 # Important Note while programming for EF Core
 	- Make sure that all  Transactional methods must be enclosed inside 'Exception-Hadling'
@@ -319,3 +369,44 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 					- Manager, Operator, Clerk, Engineer
 				- DeptUniqueId is must
 			- This method will return String Array as ouput parameter containing List of Error Messages if any 
+
+# Date 09-Jun-2021
+
+1. Create a Model for 
+	 - Customer
+		- CustomerRowId int identity primary key
+		- CustomerId string unique
+		- CustomerName string
+		- Address string
+		- City string
+		- Age int
+	- Vendor
+		- VendorRowId int identity primary key
+		- VedorId string unique
+		- VendorName string
+	- Product	
+		- ProductRowId int identity primary key
+		- ProductId string unique
+		- VendorId Foreign Key
+		- ProductName string
+		- CategoryName string
+		- UnitPrice int
+	 - Order
+		- OrderRowId int identity primary key
+		- OrderId strig unique
+		- ProductRowId Foreign key
+		- CustomerRowId Foreign key
+		- Quentity int
+		- TotalPrice int
+
+- Using FLuent API establish One-to-Many relatioships across Vendor-Products and Customer-Orders
+- ProductName, CustomerName, VendorName must have concurrency token
+- All String Fields are mandatory
+- Define length for strings using StringLength attribute
+- After creating vendor table add Address, City, Email columns as not null
+- Make sure that tables will have default data using code
+
+
+CReate a C# appliation that will allow end-user to perform following operations
+	- List Products based on VendorName
+	- Customer can place orders for Product, so display orders places by customer 

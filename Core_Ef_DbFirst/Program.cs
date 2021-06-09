@@ -28,23 +28,21 @@ namespace Core_Ef_DbFirst
 
 				var newDept = new Department()
 				{
-					DeptUniqueId = 3,
+					DeptUniqueId = 8,
 					DeptNo = "Dept-30",
 					DeptName = "SALES",
-					Location = "Mumbai-Dadar-West"
+					Location = "Mumbai-Dadar-South"
 				};
-				if (InputValidator.DeptValidator(newDept).Count == 0)
-				{ 
-				
-				}
-				//newDept = await serv.CreateAsync(newDept);
+
+				// newDept = await serv.CreateAsync(newDept);
 
 				//Console.WriteLine("After adding new Record");
+				Console.WriteLine("Enter Key to update");
+				Console.ReadLine();
+				 await serv.UpdateAsync(8, newDept);
 
-				// await serv.UpdateAsync(newDept.DeptUniqueId, newDept);
 
-
-				await serv.DeleteAsync(newDept.DeptUniqueId);
+				//await serv.DeleteAsync(newDept.DeptUniqueId);
 
 
 				depts = await serv.GetAsync();

@@ -83,16 +83,18 @@ namespace Core_Ef_DbFirst.Services
 		{
 			try
 			{
+				
 				var result = await context.Department.FindAsync(id);
 				if (result == null) throw new Exception($"Record not found, update operation is failed");
-
-				result.DeptUniqueId = entity.DeptUniqueId;
-				result.DeptNo = entity.DeptNo;
-				result.DeptName = entity.DeptName;
-				result.Location = entity.Location;
+				// detach the search record so that it can be updated
+		 	context.Entry(result).State = EntityState.Detached;
+				//result.DeptUniqueId = entity.DeptUniqueId;
+				//result.DeptNo = entity.DeptNo;
+				//result.DeptName = entity.DeptName;
+				//result.Location = entity.Location;
 
 				// modify the record 
-				//context.Entry(result).State = EntityState.Modified;
+				context.Update<Department>(entity);
 				await context.SaveChangesAsync();
 				return result;
 			}

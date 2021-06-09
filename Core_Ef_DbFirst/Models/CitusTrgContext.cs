@@ -27,7 +27,7 @@ namespace Core_Ef_DbFirst.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=MyServer;Initial Catalog=CitusTrg;Persist Security Info=False;User ID=muuser;Password=mypwd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer("Server=.;Initial Catalog=CitusTrg;Persist Security Info=False;User ID=user;Password=Pwd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
@@ -55,6 +55,7 @@ namespace Core_Ef_DbFirst.Models
                 entity.Property(e => e.Location)
                     .IsRequired()
                     .HasMaxLength(100)
+                    .IsConcurrencyToken() // make sure that the original value is not match then the cocurrency error is generated  
                     .IsUnicode(false);
             });
 
