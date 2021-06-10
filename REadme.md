@@ -410,3 +410,48 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 CReate a C# appliation that will allow end-user to perform following operations
 	- List Products based on VendorName
 	- Customer can place orders for Product, so display orders places by customer 
+
+# Date: 10-Jun-2021
+
+1. Create two Tables in database of name 
+	- Roles
+		- RoleId, RoleName
+	- Users
+		- UserId, UserName, Email, Password, RoleId
+	- Generate Entities from these tables
+		- Roles
+		- Users
+2. Create a Data Access Layer to perform following operations
+	- Create Role
+	- Create User
+	- Assign Role to the User
+3. Create a class that contains following methods
+	- CrateRole(Roles class)
+		- Perform following oerations in the mehod
+			- Check RoleName as Not-Null, Empty and Role will be only Alphabetic
+			- Check if Role Does Not Exist
+			- If Role exist return false
+			- If Not exists Create Role
+	- RegisterUser(Users class)
+		- Check UserName not null
+			- USerNAme May contains special Characters like
+				- .,-,_
+				- digits 9-0
+			- No other Special characters
+			- Must not starts from Digits ot special characters
+			- Should not contain blankspace
+			- Must be min 8 characters in length
+			- Can be max 20 characters in length
+		- Check for Email as valid EMail, (Note use .NET RegEx for Email)
+		- Password
+			- Must be Stong password
+		- COnfirmPassword
+			- Pasword and Confirm Password Must match
+		- To save the password ENcrypt it. (Note. Use .NET ENcryption)
+	- AssignRoleToUser(UserName, RoleName)
+		- Check UserName and RoleName are not EMpty
+		- UserName must be exist
+		- RoleName must be exist
+		- If UserName, RoleName doesnot exist, you may throw exceptions
+
+
