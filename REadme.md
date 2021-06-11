@@ -311,6 +311,94 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 		- instaed of catching the exception, throw it so that then layer accessing the EF COre logic class
 			will catch the exception
 
+
+# Performing Unit Testing in .NET
+1. NUnit
+	- Unit Tetsing Frwk for all .NET Languages
+	- Version 3
+	- Re-Written for increasing features in .NET and .NET Core
+	- Available using .NET Foundation
+	- Download it from https://www.nuget.org
+	- NUnit
+		- Foundation Framework for creating test Suite and Test Cases
+	- NUnit3TestAdapter
+		- An Integration between Visual Studio 2012+ and NUnit Test Cases
+		- USed to provide the Test Case Execution Statastics
+	- Microsoft.Net.Test.Sdk
+		- Visual Studio Test ENviorment for Unit Tests
+			- Provides following Services
+				- Test Explorer i.e. the Test Adapter
+				- Test Case Details for Successful and Failed Execution
+				- Generatin Unit Test Project
+					- Helpful for creating tests along with the configuration of code
+				- Live Unit Testing
+					- Imediately test the code whrn it is changes
+				- Code Coverage Feature	
+					- Provide a statastics of code Quality Test
+				- Test Debugging	
+	- Creating a Unit Test
+		- TestFixtureAttribute
+			- Class level attribute
+			- Applied on class that contains test cases
+			- Setup the test dependencies
+				- Manage the instances of depednencies required by test cases
+			- Define parameters for the private members of the class, so that they can be used by the Tets cases using comstructors 
+		- TestCaseAttribute
+			- A Method Level Attribute
+			- Represents the Method containing an implementation of Test Case
+				- Test Case
+					- The Approach that is followed to test the User Story (aka the implementation done by the developer)
+					- Each Test case has following 3 steps for execution
+						- Arrange
+							- The process of collecting required test data to execte the test
+							- CReate instance of class of which method to be tested
+							- Initialize Parameters values using either hard-coding or using Data-Driven Unit Test
+							- CReating a Mock of the depdencnies aka the 'Fake Object'
+							- Expected Result
+						- Act
+							- Process of actually Invoking method to be testsed
+								- PAss parameters
+								- USe Fake Objects
+								- Receive Actual Result
+						- Assert
+							- Assertion
+								- Compare the Expected Result with Actual Result
+									- Equal, Not-Equal, Greater Than, Less than, Greater-than-equal, Less-than-equal
+									- Contains, Not-Contain, Typeof
+									- Throws Exception
+									- Raise Event
+				- TestCase
+					-  Used for Data-Driven Tests
+						- Hard Coded values
+						- File Source Based Testing
+							- xlsx or csv files to read test data (Recommended)
+						- Database Based Testing
+							- Data is fetched from table to test the method	
+				- IgnoreAttribute
+					- Indicates that the test should't be run
+				- Repeat Atribute
+					- repeate the test execution for multiple time
+				- SetUpFixture
+					- COntains the cofiguration for one-time Tearup and teardown methdo for all test in the class
+					- OneTimeSetUpAttribute
+						- APplied on method to make sure that the method will be executed before each test case
+					- OneTimeTearDownAttribute
+						- Applied on method to make sure that this method will be eecuted after each test case
+
+	- Assertion Types
+		- CollectionAssert
+			- Provide the Test Evaluation assertion on Collection Inputs
+
+
+# Practically Working with NUnit
+1. Create a MS-Test Project or Class Library project (.NET Core)
+	- If using Class Librray project then add following NuGet Packages
+		- Microsoft.Net.Test.Sdk (Mandatory to access Test Explorer)
+		- NUnit
+		- NUnit3TestAdapeter
+	- In the test project also add the Project Reference thatb represents the code to be tested
+
+
 # Hands -on -Lab
 
 # Date: 02-Jun-2021
@@ -454,4 +542,5 @@ CReate a C# appliation that will allow end-user to perform following operations
 		- RoleName must be exist
 		- If UserName, RoleName doesnot exist, you may throw exceptions
 
-
+# Date: 11-Jun-2021
+- Write Unit Tests on the Problem Statement of Date 10-June-2021
