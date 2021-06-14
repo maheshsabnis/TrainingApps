@@ -399,6 +399,18 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 	- In the test project also add the Project Reference thatb represents the code to be tested
 
 
+2. Data Driven Tests
+	- These are tests those accepts Data Source Information to execute the test. The Data Source provides the test data so that Test Method can use this data for making sure that the method to be tested is executed on all possible combinations of the input values and generate expected results
+	- Microsoft.VisualStidio.TestTools.UnitTesting namespace
+		- The 'DataSource' class
+			- CSV
+				- Reds data from CSV files
+			- SqlServer
+			- Excel
+- Microsoft.VisualStudio.TestTools.UnitTesting.TestContext
+	- The TestContext class is used to read the data dource provider for the curfrent testing environment  
+
+
 # Hands -on -Lab
 
 # Date: 02-Jun-2021

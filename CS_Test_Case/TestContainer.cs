@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CS_User_Story;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = NUnit.Framework.Assert;
+
 namespace CS_Test_Case
 {
 	[TestFixture]
@@ -15,9 +18,9 @@ namespace CS_Test_Case
 			string Name = "Mahesh"; // expected 
 			// Act
 			string testName = "Mahesh1"; // actual
-			// Assertion
-			// Assert.AreEqual(Name,testName);
-			Assert.AreNotEqual(Name, testName);
+										 // Assertion
+										 // Assert.AreEqual(Name,testName);
+			NUnit.Framework.Assert.AreNotEqual(Name, testName);
 		}
 
 		[Test]
@@ -31,7 +34,7 @@ namespace CS_Test_Case
 			// Act
 			int actual = calc.Add(x,y);
 			// Assert
-			Assert.AreEqual(expected,actual);
+			NUnit.Framework.Assert.AreEqual(expected,actual);
 		}
 
 		[Test]
@@ -45,7 +48,7 @@ namespace CS_Test_Case
 			// Act
 			int actual = calc.Divide(x, y);
 			// Assert
-			Assert.AreEqual(expected, actual);
+			NUnit.Framework.Assert.AreEqual(expected, actual);
 		}
 
 		[Test]
@@ -57,10 +60,10 @@ namespace CS_Test_Case
 			 
 			Calculator calc = new Calculator();
 			// Act
-			 
+
 			// Assertion for Exception
 			// Act and Assertion both are done ata a time
-			Assert.Throws<DivideByZeroException>(()=> calc.Divide(x,y));
+			NUnit.Framework.Assert.Throws<DivideByZeroException>(()=> calc.Divide(x,y));
 		}
 
 		// Throw the exception and make sure that the expected
@@ -78,9 +81,9 @@ namespace CS_Test_Case
 		 
 			// Assertion for Exception
 			// Act and Assertion both are done ata a time
-			var ex = Assert.Throws<DivideByZeroException>(() => calc.Divide(x, y));
+			var ex = NUnit.Framework.Assert.Throws<DivideByZeroException>(() => calc.Divide(x, y));
 
-			Assert.AreEqual("Denominator cannot be zero", ex.Message);
+			NUnit.Framework.Assert.AreEqual("Denominator cannot be zero", ex.Message);
 			// OR
 			Assert.That(ex.Message, Is.EqualTo("Denominator cannot be zero"));
 		}
@@ -98,7 +101,7 @@ namespace CS_Test_Case
 			Calculator calc = new Calculator();
 			// Act
 			int actual = calc.Divide(x,y);
-			Assert.That(actual,Is.EqualTo(0));
+			NUnit.Framework.Assert.That(actual,Is.EqualTo(0));
 
 		}
 
@@ -114,7 +117,7 @@ namespace CS_Test_Case
 			string pwd = "mahesh";
 			AuthService auth = new AuthService();
 			var result = auth.Login(uname,pwd);
-			Assert.That(result, Is.EqualTo("Login Successful"));
+			NUnit.Framework.Assert.That(result, Is.EqualTo("Login Successful"));
 		}
 
 		/// <summary>
@@ -128,7 +131,7 @@ namespace CS_Test_Case
 			string pwd = "mahesh";
 			AuthService auth = new AuthService();
 			var result = auth.Login(uname, pwd);
-			Assert.That(result, Is.EqualTo("Incorrect User Name or Password"));
+			NUnit.Framework.Assert.That(result, Is.EqualTo("Incorrect User Name or Password"));
 		}
 
 		/// <summary>
@@ -146,7 +149,7 @@ namespace CS_Test_Case
 
 			AuthService auth = new AuthService();
 			var result = auth.Login(uname, pwd);
-			Assert.That(result, Is.EqualTo("User Name or Pasword can ot be null or empty"));
+			NUnit.Framework.Assert.That(result, Is.EqualTo("User Name or Pasword can ot be null or empty"));
 		}
 
 
@@ -162,7 +165,12 @@ namespace CS_Test_Case
 		{
 			AuthService auth = new AuthService();
 			bool actual = auth.AuthUser(uname,pwd);
-			Assert.AreEqual(expected,actual);
+			NUnit.Framework.Assert.AreEqual(expected,actual);
 		}
+
+
+		
+
+
 	}
 }
