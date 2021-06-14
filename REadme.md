@@ -409,7 +409,15 @@ Initial Catalog=CitusTrg;Persist Security Info=False;User ID=USerName;Password=P
 			- Excel
 - Microsoft.VisualStudio.TestTools.UnitTesting.TestContext
 	- The TestContext class is used to read the data dource provider for the curfrent testing environment  
-
+	
+- Using the Mocks for Unit Testing of methods those who are having external depednencies e.g. database, files, networks, etc.
+	- The 'Moq'Framework is provided by community to perform the Unit Testing of the C# code whih is having third-party or external depednencies.
+		- Steps of using Moq
+			- Install it in Testing Project
+			- Create a Mock<T> object, where T is the Types that is used to create Fake object (aka in-memory)
+			- Setup the Mock and point the method to be tested and verify the retur type from it
+			- Call the actual method to be tested from the class by passing te Fake objetc as a dependency
+			
 
 # Hands -on -Lab
 
@@ -556,3 +564,15 @@ CReate a C# appliation that will allow end-user to perform following operations
 
 # Date: 11-Jun-2021
 - Write Unit Tests on the Problem Statement of Date 10-June-2021
+
+# Date: 14-Jun-2021
+
+1. CReate a Unit Test on CreateAsync() method for creating cataegory. And Make Sure that, the Test data is read from the 
+	- TestCaseAttriute() class
+		- Create a dotnetcore unit test project
+	- From the CSV file
+		- Create .NET Framework MS-Test Project
+2. Makes sure that when the query is executed against the GetRoles() method (Refer Lab on Date 10-Jun-201), Roles returned from database Role Table must be Manager, Clerk, Operator, Engineer, Developer
+	- Tyhe data must be received from database
+3. Create a Moq Test that will fetch UserNames from Users Table 
+	- Actual call to the database must not takes place
