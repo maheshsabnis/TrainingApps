@@ -31,7 +31,6 @@ namespace Core_API
 				options.UseSqlServer(Configuration.GetConnectionString("AppConnetcion"));
 			});
 
-
 			// Registration of Custom Depednencies
 			services.AddScoped<IService<Categories, int>, CategoryService>();
 			services.AddScoped<IService<Products, int>, ProductsService>();

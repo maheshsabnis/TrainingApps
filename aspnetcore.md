@@ -65,3 +65,11 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 								- Endpoint
 									- Middleware used to map the incomming request to the controller mentioned in Http Request, internally this uses the RoutingMiddleware
 	- Controllers Folder
+		- This contains all API Controllers un API Project
+``` csharp
+[Route("api/[controller]")]
+	[ApiController]
+	public class CategoryController : ControllerBase
+	{
+	}
+```

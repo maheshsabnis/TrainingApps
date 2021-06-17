@@ -67,7 +67,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_DB_Access", "CS_DB_Acces
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_Moq_Test", "CS_Moq_Test\CS_Moq_Test.csproj", "{0165BCD0-043B-491A-B6FE-3981EAA670F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core_API", "Core_API\Core_API.csproj", "{1386E952-D6AA-4F24-B1B8-E80FFE3C5B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core_API", "Core_API\Core_API.csproj", "{1386E952-D6AA-4F24-B1B8-E80FFE3C5B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_Factory", "CS_Factory\CS_Factory.csproj", "{F8F48496-6C85-426A-A251-2ED2E267EABF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -195,6 +197,10 @@ Global
 		{1386E952-D6AA-4F24-B1B8-E80FFE3C5B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1386E952-D6AA-4F24-B1B8-E80FFE3C5B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1386E952-D6AA-4F24-B1B8-E80FFE3C5B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
