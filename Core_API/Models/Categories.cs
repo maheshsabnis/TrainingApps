@@ -20,7 +20,7 @@ namespace Core_API.Models
         [Required(ErrorMessage = "Category Name is required")]
         public string CategoryName { get; set; }
         [Required(ErrorMessage = "Base Price is required")]
-        [NumericValidator(ErrorMessage = "Base Price annot be -ve")]
+      //  [NumericValidator(ErrorMessage = "Base Price annot be -ve")]
         public int BasePrice { get; set; }
         [Required(ErrorMessage = "Sub Category Name is required")]
         public string SubCategoryName { get; set; }

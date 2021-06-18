@@ -41,10 +41,11 @@ namespace Core_API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> PostAsync(Categories data)
 		{
-			try
-			{
+			//try
+			//{
 				if (ModelState.IsValid)
 				{
+					if (data.BasePrice < 0) throw new Exception("Price Cannot be -ve");
 					var result = await catServ.CreateAsync(data);
 					return Ok(result);
 				}
@@ -52,11 +53,11 @@ namespace Core_API.Controllers
 				{
 					return BadRequest(ModelState);
 				}
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			//}
+			//catch (Exception ex)
+			//{
+			//	return BadRequest(ex.Message);
+			//}
 		}
 		[HttpPut("{id}")] // the id is accepted in Header as URL Parameter
 		public async Task<IActionResult> PutAsync(int id, Categories data)

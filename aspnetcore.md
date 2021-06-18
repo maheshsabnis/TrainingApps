@@ -103,6 +103,15 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 2. Make sure that, the Action Method uses Exception Throw and Exception Handling logic
 	- try..catch
 	- Global Exception Middleware
+		- Rules for writing Custom Middlewares
+			- The class containing Logic for Custom Middleware must be COnstructor Injected using 'RequestDelegate' object
+			- This class must contain an method of name 'InvokeAsync()' this method must accept 'HttpContext' object. The custom midleware logic mustb be written in this method
+			- Create a Static class with static method. This method must be used as extension method for IApplicationBuilder. i.e. This method will accept first parameter as 'this IApplicationBuilder app'
+				- IN this method register the Custom Middleware class as 'Middleware'
+					- app.UserMiddleware<T>();
+						- T is the the name of the Custom Middleware class which is ctor ibjected using RequestDelegate
+			- Finally use this Static method in 'Configure()' method of Startup class to use the middleware in pipeline
+
 3. MAke sure that the Posted data in various ways(?) must be accepted by the API and Process it
 	- VArious ways are
 		- Data Posted in Body
@@ -123,6 +132,26 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 	- services.AddCors(policy), in ConfigureServices() method of Startup class
 	- app.UserCors("Policyname") in Configure() method of Startup Class
 		- Policyname is the policy configuration defined using AddCors() method
+
+5. The Identity with Tokens
+	- Microsoft.AspNetCore.Identity.UI
+		- Provodes Identity classed for User and Role Management
+	- Microsoft.AspNetCore.Identity.EntityFrameworkCore
+		- Provides an integration with EF core for Storing Users,Roles, information in SQLServer Database
+	- Microsoft.AspNetCore.Authentication.JwtBearer
+		- Provides JWT Authentication for APIs
+	- SYstem.IdentityModel.Tokens.Jwt
+		- Provides set of classed to create JWT 
+	- IdentityDbContext
+		- CLass used to connect with database to map wth ASP.NET Identity Tables
+			- AspNetUsers, AspNetRoles, AspNetUsersInRoles, etc.
+		- IdentityUser
+			- Class mapped with AspNetUsers to store Application Users Information
+		- IdentityRole
+			- Class mapped with AspNetRoles to store Application Roles Information
+		- AspNetUsersInRoles
+			- Table to store Roles-To-Users mapping
+	
 
 
 # Hands-on-Labs API

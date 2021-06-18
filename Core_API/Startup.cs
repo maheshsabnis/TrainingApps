@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using Core_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Core_API.Services;
+using Core_API.CustomMiddlewares;
+using Microsoft.AspNetCore.Identity;
+
 namespace Core_API
 {
 	public class Startup
@@ -30,6 +33,19 @@ namespace Core_API
 			services.AddDbContext<CitusTrainingContext>(options=> {
 				options.UseSqlServer(Configuration.GetConnectionString("AppConnetcion"));
 			});
+
+
+			// Register the SecurityContext class in DI Container\
+			// this class will be used to map with Identity tables to control Application security 
+			services.AddDbContext<SecurityContext>(options => {
+				options.UseSqlServer(Configuration.GetConnectionString("SecurityConnetcion"));
+			});
+
+			// Register the Application Identity for User Management 
+
+			services.AddDefaultIdentity<IdentityUser>(options=> {
+				options.SignIn.RequireConfirmedAccount = false;
+			}).AddEntityFrameworkStores<SecurityContext>(); // use the SecurityContext for SignIn
 
 
 			// define CORS Policies
@@ -67,8 +83,16 @@ namespace Core_API
 			// the ROuting Middleware that will be used to read the Request URL and check itb in Route Dictionary
 			// for Mapping
 			app.UseRouting();
+
 			// Securtity
+			// Add Middleware for Authentication
+			app.UseAuthentication();
 			app.UseAuthorization();
+
+			// Use Custom Middleware
+
+			app.UseExceptionMiddleware();
+
 
 			// Map the Incomming HTTP Requests with the
 			// MVC Controllers
