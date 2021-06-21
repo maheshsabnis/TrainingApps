@@ -71,6 +71,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core_API", "Core_API\Core_A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_Factory", "CS_Factory\CS_Factory.csproj", "{F8F48496-6C85-426A-A251-2ED2E267EABF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_App", "MVC_App\MVC_App.csproj", "{640ED11F-5B46-460A-A904-5E419D2800DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -201,6 +203,10 @@ Global
 		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8F48496-6C85-426A-A251-2ED2E267EABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{640ED11F-5B46-460A-A904-5E419D2800DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640ED11F-5B46-460A-A904-5E419D2800DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640ED11F-5B46-460A-A904-5E419D2800DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640ED11F-5B46-460A-A904-5E419D2800DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -170,4 +170,13 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 		- CReate a ViewModel Class as
 			- public class CatPrd {Catogory object, List<Product> Products}
 				Post(CatPrd), approach 2
+# Date : 21-Jun-2021
+
+4. Create a middleware in ASP.NET API to log each incomming request in database and even if the exception occures then this exeception information must be stored in database table. The table deasign will be as follows
+	- LogId: Idenntity Key int
+	- LogGUID: Guid
+	- Request Date and Time
+	- Controller Name
+	- Action method
+	- Exception Handled
 
