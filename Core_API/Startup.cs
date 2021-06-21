@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Core_API.Services;
 using Core_API.CustomMiddlewares;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Core_API
 {
@@ -47,7 +49,31 @@ namespace Core_API
 				options.SignIn.RequireConfirmedAccount = false;
 			}).AddEntityFrameworkStores<SecurityContext>(); // use the SecurityContext for SignIn
 
+			// write the logic for validating the Token
+			// this needs the Signeture Key to verify the integrity of the token
 
+			byte[] secretKey = Convert.FromBase64String(Configuration["JWTCoreSettings:SecretKey"]);
+			// modify the AddAuthentication() method to enable and verify the JWT based security
+			services.AddAuthentication(options=> {
+				// the default schem for Authentication verification of server must be Bearer Token
+				// the Server must check if the request header contains the JWT in it
+				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			})
+				// validate the JW Token 
+				.AddJwtBearer(token => {
+					token.RequireHttpsMetadata = false; // in production it must be set to ture
+					token.SaveToken = true; // Save token in Server's Process by default
+											// Set the Token Validation Parameters
+					token.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+					{
+						ValidateIssuerSigningKey = true,
+					    IssuerSigningKey =new SymmetricSecurityKey(secretKey),
+						ValidateIssuer = false,
+						ValidateAudience = false
+					};
+					
+				});
 			// define CORS Policies
 			services.AddCors(options=> {
 				options.AddPolicy("corspolicy", policy=> {
@@ -57,7 +83,11 @@ namespace Core_API
 			});
 
 
+
 			// Registration of Custom Depednencies
+
+			services.AddScoped<AuthService>();
+			
 			services.AddScoped<IService<Categories, int>, CategoryService>();
 			services.AddScoped<IService<Products, int>, ProductsService>();
 			// accept and process requests for APIs 

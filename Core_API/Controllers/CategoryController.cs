@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core_API.Models;
 using Core_API.Services;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Core_API.Controllers
 {
 	/// <summary>
@@ -14,6 +16,7 @@ namespace Core_API.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class CategoryController : ControllerBase
 	{
 		private readonly IService<Categories,int> catServ;
