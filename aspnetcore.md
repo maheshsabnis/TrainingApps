@@ -152,7 +152,46 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 		- AspNetUsersInRoles
 			- Table to store Roles-To-Users mapping
 	
+6. The ASP.NET COre uses a Razor View LIbrary for rendering UI for ASP.NET COre Identity
+	- Microsoft.AspNetCore.Identity.UI Package
+		- Contains Views for
+			- Register User, Login User, EmailConfirmation, Forgot Password, etc. 
+		- This is a Common UI for Razor View Apps, MVC apps
+			- If needed this can be customized based on requirements
+		- AddRAzorPages()
+			- Will accept and process requests for Razor View, seperate from the MVC ENvironment. THis will look for the page and execute it
+7. ASP.NET COre Views
+	- RazorPage<TModel> is base class for Views in ASP.NET Core
+	- TModel is the Model class bound to view
+	- TageHelpers
+		- Server-Side HTML Attributed applied on HTML elemets to set its behavior
+		- aps-for
+			- Bind the Public scalar property of Model class with HTML element
+		- asp-items
+			- Geerate HTML elements based on collection
+			- Generally used for <select> element
+		- asp-controller
+			- Post the request to the Controller
+		- asp-action
+			- Post the request to the action
+		- asp-validation-for
+			- Load and execute validation for Model Property on UI 
+	- @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+		- @addTagHelper will register the namespace containing TagHelpeerrs in the project
 
+	- To load colleciton in <select> element use asp-items and iterate over it to generate options		
+8. ASP.NET Core Breaking Changes
+	- Session Provider Changes
+		- Session is stored in Local Cache on the server
+		- The UseSession() middlware and AddSession() service must be enabled for the HttpContext on Host to make sure that the HttpContext will connect to the Cache to verify the sesison information
+		- The ISession contractb interface is provided by ASP.NET Core with
+			- Set(<string Key>, byte[]) and TryGetValue(string key, out bute[]) methods
+				- Key is the identification of the session value in cache
+				- Since the data is stored in cache memory, it will be serialized in Binary format  
+		-  Microsoft.AspNetCore.Http;
+			- Use this namespace to access 'SessionExtension' methods to save
+				- Integer and Seting values in Session Store
+		- We can store CLR object in Binary Serialized form in Session Store and by creatig a customm extension the CLR object can be stored in Session in JSON or any other form as per the requirement 
 
 # Hands-on-Labs API
 
@@ -180,3 +219,6 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 	- Action method
 	- Exception Handled
 
+# Date 22-Jun-2021
+1. Modiy the ProductController to edit Product Record based on selected Propeduct from Index view of the product. Make sure that, the Edit View showes SubCategoryName list having the SubCategoryName selected for the product being updated.
+2. CReate a Single View that will show List of Categories and Products on Same View in Tabular form. When a Category is selected from the Category Table, the Product Table shold show only products in selected category 

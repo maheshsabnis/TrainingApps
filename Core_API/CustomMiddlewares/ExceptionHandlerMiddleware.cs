@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Core_API.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace Core_API.CustomMiddlewares
 			{
 				// if exception occures then catch it and generate response
 				context.Response.StatusCode = 500;
+ 
 
 				var exceptionDetails = new ExceptionInfo()
 				{
