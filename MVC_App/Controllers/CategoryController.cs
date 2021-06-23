@@ -30,14 +30,26 @@ namespace MVC_App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(Categories data)
 		{
-			if (ModelState.IsValid)
+			try
 			{
-				var res = await catService.CreateAsync(data);
-				return RedirectToAction("Index");
+				if (ModelState.IsValid)
+				{
+					var res = await catService.CreateAsync(data);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(data);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return View(data);
+				return View("Error", new ErrorViewModel()
+				{
+					ControllerName = RouteData.Values["controller"].ToString(),
+					ActionName = RouteData.Values["action"].ToString(),
+					ErrorMessage = $"{ex.Message} \n Detailed Exception {ex.InnerException.Message}"
+				}) ;
 			}
 		}
 
@@ -50,14 +62,21 @@ namespace MVC_App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id,Categories data)
 		{
-			if (ModelState.IsValid)
+			try
 			{
-				var res = await catService.UpdateAsync(id,data);
-				return RedirectToAction("Index");
+				if (ModelState.IsValid)
+				{
+					var res = await catService.UpdateAsync(id, data);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(data);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return View(data);
+				return View("Error");		
 			}
 		}
 

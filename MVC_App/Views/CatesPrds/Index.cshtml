@@ -1,0 +1,120 @@
+﻿@model MVC_App.ViewModels.CategoriesProducts
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Master-Details View</h1>
+
+<h2>List of Categories</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Category Row Id
+			</th>
+			<th>
+				Category Id
+			</th>
+			<th>
+				Category Name
+			</th>
+			<th>
+				Base Price
+			</th>
+			<th>
+				Sub Category Name
+			</th>
+
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Categories)
+		{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.CategoryRowId)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CategoryId)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CategoryName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.BasePrice)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.SubCategoryName)
+			</td>
+			<td>
+				@Html.ActionLink("Show Products", "ShowProducts", new { id = item.CategoryRowId })
+			</td>
+			<td>
+				@Html.ActionLink("Show Products New", "ShowProductsNew", new { id = item.CategoryRowId })
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
+<hr />
+<h2>List of Products</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Product Row Id
+			</th>
+			<th>
+				Product Id
+			</th>
+			<th>
+				Product Name
+			</th>
+			<th>
+				Manufacturer
+			</th>
+			<th>
+				Description
+			</th>
+			<th>
+				Price
+			</th>
+			<th>
+				Category Row Id
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Products)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductRowId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Manufacturer)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Desicription)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CategoryRowId)
+				</td>
+				 
+			</tr>
+		}
+	</tbody>
+</table>
