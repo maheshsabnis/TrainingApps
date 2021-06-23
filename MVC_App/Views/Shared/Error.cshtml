@@ -6,36 +6,68 @@
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 
-@if (Model.ShowRequestId)
-{
-	<p>
-		<strong>Request ID:</strong> <code>@Model.RequestId</code>
-	</p>
-}
 <hr />
 <h2>Error Occured</h2>
-<div class="container">
-	<p>
-		<strong>
-			Controller Name @Model.ControllerName
-		</strong>
-	</p>
-</div>
-<hr />
-<div class="container">
-	<p>
-		<strong>
-			Action Name @Model.ActionName
-		</strong>
-	</p>
-</div>
-<hr />
-<div class="container">
-	<p>
-		<strong>
-			Error Message @Model.ErrorMessage
-		</strong>
-	</p>
-</div>
-<br/>
-<a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName">Go Back</a>
+@if (Model != null)
+{
+
+	@if (Model.ShowRequestId)
+	{
+		<p>
+			<strong>Request ID:</strong> <code>@Model.RequestId</code>
+		</p>
+	}
+	<div class="container">
+		<p>
+			<strong>
+				Controller Name @Model.ControllerName
+			</strong>
+		</p>
+	</div>
+	<hr />
+	<div class="container">
+		<p>
+			<strong>
+				Action Name @Model.ActionName
+			</strong>
+		</p>
+	</div>
+	<hr />
+	<div class="container">
+		<p>
+			<strong>
+				Error Message @Model.ErrorMessage
+			</strong>
+		</p>
+	</div>
+	<br />
+	<a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName">Go Back</a>
+}
+else
+{
+	<div class="container">
+		<p>
+			<strong>
+				Controller Name @ViewData["ControllerName"]
+			</strong>
+		</p>
+	</div>
+	<hr />
+	<div class="container">
+		<p>
+			<strong>
+				Action Name @ViewData["ActionName"]
+			</strong>
+		</p>
+	</div>
+	<hr />
+	<div class="container">
+		<p>
+			<strong>
+				Error Message @ViewData["ExceptionMessage"]
+			</strong>
+		</p>
+	</div>
+	<br />
+	<a asp-controller="@ViewData["ControllerName"]" asp-action="@ViewData["ActionName"]">Go Back</a>
+} 

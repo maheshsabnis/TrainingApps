@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MVC_App.Models;
 using MVC_App.Services;
+using MVC_App.CustomFilters;
 namespace MVC_App
 {
 	public class Startup
@@ -58,7 +59,14 @@ namespace MVC_App
 			// AddControllersWithViews() , if te cotroller returns the View() as 
 			// response then this method will be used to process request for MVC
 			// COntroller, else if the response if JSON then request for API COntroller will be processed
-			services.AddControllersWithViews();
+			// define the MvcOpetions for configuring Custom Action Filters in the Pipeline
+			services.AddControllersWithViews(options => {
+				// this will add the custom filter in pipeline and will resolve
+				// all of its dependencies
+				options.Filters.Add(typeof(MyExceptionFilterAttribute));
+				options.Filters.Add(new LogFilterAttribute()); // No depednency
+			  
+			});
 			// The method that accepts request for Razor Pages
 			services.AddRazorPages();
 		}

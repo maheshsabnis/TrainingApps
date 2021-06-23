@@ -203,6 +203,9 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 					- use the Error view to show error messages
 				- Controller Level
 				- Application Level
+			- Implement the Custom Exception FIlters to handle the exception and navigate to the custom error page
+				- The class for Custom Exception Filter must be derived from ExceptionFilterAttribute class. THis class contais OnException(ExceptionContext) / OnExceptionAsync(ExceptionContext) method
+					- ExceptionContext, object is responsible to listen and handle exception and return the Error Response (e.g. View)  
 
 
 
@@ -243,3 +246,5 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 # Date 23-Jun-2021
 3. Create a view that will show a drop down where the List of Sub Categories will be displayed. The Same view will also show list of All products in Table by default. When a Sub Category is selected from the dropdown then only selected Products for the SubCategory must be displayed in Sorted order by Price of the Product. 
 4. Handle the Exception in Action Method and navigate to the error page. When we click on 'Go BAck' link on the Erro Page, the Page (and hence the action) should show the data  that has coused the error with error message on this page for value tat has coused the error.
+5. Combine the Exception FItes with Logic of Logging the Requests and Exceptions in Database. (Offline and show by MOnday)
+	- Create seperate Exception Error Pages for Database Exception and any other exception and navigate to these pages when the excption occur using same exception filter 

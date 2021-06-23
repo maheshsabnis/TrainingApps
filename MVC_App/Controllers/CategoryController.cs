@@ -7,8 +7,13 @@ using MVC_App.Models;
 using MVC_App.Services;
 using Microsoft.AspNetCore.Http;
 using MVC_App.SessionExtensions;
+using MVC_App.CustomFilters;
 namespace MVC_App.Controllers
 {
+	/// <summary>
+	/// applying the Action Filter on Controller level
+	/// </summary>
+	//[MyExceptionFilter]
 	public class CategoryController : Controller
 	{
 		private readonly IService<Categories, int> catService;
@@ -30,27 +35,30 @@ namespace MVC_App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(Categories data)
 		{
-			try
-			{
+			//try
+			//{
 				if (ModelState.IsValid)
 				{
+				if (data.BasePrice < 0) throw new Exception("Price cannot be zero");
+				if (data.CategoryName == string.Empty) throw new Exception("Modle is invalid");
 					var res = await catService.CreateAsync(data);
+					
 					return RedirectToAction("Index");
 				}
 				else
 				{
 					return View(data);
 				}
-			}
-			catch (Exception ex)
-			{
-				return View("Error", new ErrorViewModel()
-				{
-					ControllerName = RouteData.Values["controller"].ToString(),
-					ActionName = RouteData.Values["action"].ToString(),
-					ErrorMessage = $"{ex.Message} \n Detailed Exception {ex.InnerException.Message}"
-				}) ;
-			}
+			//}
+			//catch (Exception ex)
+			//{
+			//	return View("Error", new ErrorViewModel()
+			//	{
+			//		ControllerName = RouteData.Values["controller"].ToString(),
+			//		ActionName = RouteData.Values["action"].ToString(),
+			//		ErrorMessage = $"{ex.Message} \n Detailed Exception {ex.InnerException.Message}"
+			//	}) ;
+			//}
 		}
 
 		public async Task<IActionResult> Edit(int id)
