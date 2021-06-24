@@ -205,8 +205,26 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 				- Application Level
 			- Implement the Custom Exception FIlters to handle the exception and navigate to the custom error page
 				- The class for Custom Exception Filter must be derived from ExceptionFilterAttribute class. THis class contais OnException(ExceptionContext) / OnExceptionAsync(ExceptionContext) method
-					- ExceptionContext, object is responsible to listen and handle exception and return the Error Response (e.g. View)  
-
+					- ExceptionContext, object is responsible to listen and handle exception and return the Error Response (e.g. View) 
+9. Security ASP.NET Core Applications
+	- User Based Authentication
+		- UserManager<IdentityUser>
+			- Class used to Manage Application Users
+				- Register User using IdentityUser
+				- PAssword Hash
+		- SignInManager<IdentityUser>
+			- Verify the User and Password using IdentitUser class
+			- Manage SignIn Process
+				- Create Auth User
+				- Create Persistant Cookie
+				- User LockOut
+				- Two-factor Authentication
+	- Role Based Authentication
+		- RoleManager<IdentityRole>
+			- Class used to Manage Application Roles
+				- Create New Roles for the Application using IdentityRole class
+	- Poicy Based Authorization
+		- Define Access policies for roles to set the application Autorization
 
 
 # Hands-on-Labs API
@@ -248,3 +266,8 @@ public interface IServiceCollection : ICollection<ServiceDescriptor>, IEnumerabl
 4. Handle the Exception in Action Method and navigate to the error page. When we click on 'Go BAck' link on the Erro Page, the Page (and hence the action) should show the data  that has coused the error with error message on this page for value tat has coused the error.
 5. Combine the Exception FItes with Logic of Logging the Requests and Exceptions in Database. (Offline and show by MOnday)
 	- Create seperate Exception Error Pages for Database Exception and any other exception and navigate to these pages when the excption occur using same exception filter 
+
+# Date 24-July-2021
+6. Create a Default Administrator user (Role and User both) for the Application when the app is executed for the first. The Administrator User can only create new Roles for the application. The Administaror can only assign Role to User. 
+	- The Products and Categoris can be access by all roles as readonly
+	- The Create/Update/Delete operations can only be performed using Adminstrator and Manager role

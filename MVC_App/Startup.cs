@@ -32,8 +32,32 @@ namespace MVC_App
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<ApplicationDbContext>();
+
+			// Add the Idenity Services for the Current application based on User Management
+			//services.AddDefaultIdentity<IdentityUser>(/*options => options.SignIn.RequireConfirmedAccount = false*/)
+			//	.AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+			// Add the Identity Service that will be used for User and Role Management
+			// this will resolve the class injected with UserManager<IdentityUser> ands also
+			// RoleManager<IdentityRole>
+			services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+			// define custom policies for Roles using Authorization Service
+			services.AddAuthorization(options=> 
+			{
+				options.AddPolicy("readpolicy", policy=> 
+				{
+					policy.RequireRole("Manager", "Clerk", "Operator");
+				});
+
+				options.AddPolicy("writepolicy", policy =>
+				{
+					policy.RequireRole("Manager", "Clerk");
+				});
+			});
+
 
 			services.AddDbContext<CitusTrainingContext>(options=> {
 				options.UseSqlServer(Configuration.GetConnectionString("AppConnetcion"));
@@ -63,8 +87,8 @@ namespace MVC_App
 			services.AddControllersWithViews(options => {
 				// this will add the custom filter in pipeline and will resolve
 				// all of its dependencies
-				options.Filters.Add(typeof(MyExceptionFilterAttribute));
-				options.Filters.Add(new LogFilterAttribute()); // No depednency
+				//options.Filters.Add(typeof(MyExceptionFilterAttribute));
+				//options.Filters.Add(new LogFilterAttribute()); // No depednency
 			  
 			});
 			// The method that accepts request for Razor Pages

@@ -8,12 +8,15 @@ using MVC_App.Services;
 using Microsoft.AspNetCore.Http;
 using MVC_App.SessionExtensions;
 using MVC_App.CustomFilters;
+using Microsoft.AspNetCore.Authorization;
+
 namespace MVC_App.Controllers
 {
 	/// <summary>
 	/// applying the Action Filter on Controller level
 	/// </summary>
 	//[MyExceptionFilter]
+
 	public class CategoryController : Controller
 	{
 		private readonly IService<Categories, int> catService;
@@ -21,12 +24,15 @@ namespace MVC_App.Controllers
 		{
 			catService = s;
 		}
+		//[Authorize(Roles = "Manager,Clerk,Operator")]
+		[Authorize(Policy = "readpolicy")]
 		public async  Task<IActionResult> Index()
 		{
 			var res = await catService.GetAsync();
 			return View(res);
 		}
-
+		//[Authorize(Roles ="Manager,Clerk")]
+		[Authorize(Policy = "writepolicy")]
 		public IActionResult Create()
 		{
 			return View(new Categories());
